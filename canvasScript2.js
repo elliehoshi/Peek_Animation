@@ -5,20 +5,40 @@ $(document).ready(function(){
     height: 500
   });
 
-  var layer = new Kinetic.Layer();
+  // Static Rectangles
+  var shapesLayer = new Kinetic.Layer();
 
-  var staticRect = new Kinetic.Rect({
+  var staticRectGroup = new Kinetic.Group({
     x: 30,
-    y: 15,
-    width: 100,
-    height: 50,
-    fill: 'black',
-    stroke: 'black',
-    strokeWidth: 4
+    y: 40
   });
 
-  var rect = new Kinetic.Rect({
-    x: 30,
+  var rectColors = ['black', 'gray'];
+
+  for(var n = 0; n < 2; n++) {
+    (function() {
+      var i = n;
+      var staticRect = new Kinetic.Rect({
+        x: 30,
+        y: i * 150,
+        width: 100,
+        height: 50,
+        fill: rectColors[i],
+        stroke: rectColors[i],
+        strokeWidth: 4
+      });
+      staticRectGroup.add(staticRect);
+    })();
+  }
+
+  shapesLayer.add(staticRectGroup);
+  stage.add(shapesLayer);
+
+  // Moving Rectangle
+  var movingRectLayer = new Kinetic.Layer();
+
+  var movingRect = new Kinetic.Rect({
+    x: 60,
     y: 115,
     width: 100,
     height: 50,
@@ -27,18 +47,20 @@ $(document).ready(function(){
     strokeWidth: 4
   });
 
-  var staticRect2 = new Kinetic.Rect({
-    x: 30,
-    y: 215,
-    width: 100,
-    height: 50,
-    fill: 'gray',
-    stroke: 'black',
-    strokeWidth: 4
-  });
+  // add the shape to the layer
+  movingRectLayer.add(movingRect);
 
-  var bucket1 = new Kinetic.Rect({
-    x: 200,
+  stage.add(movingRectLayer);
+
+
+  // Peek bucket
+
+  var bucketLayer = new Kinetic.Layer();
+
+
+  var peekBucket = new Kinetic.Rect({
+    x: 700,
+    // x: 200,
     y: 300,
     width: 200,
     height: 100,
@@ -47,74 +69,44 @@ $(document).ready(function(){
     strokeWidth: 4
   });
 
-  // var imageObj = new Image();
-  // imageObj.onload = function() {
-  //   var bucket2 = new Kinetic.Image({
-  //     x: 200,
-  //     y: 300,
-  //     width: 200,
-  //     height: 200,
-  //     image: imageObj
-  //   });
-  //   layer.add(bucket2);
-  // };
-
-  // imageObj.src = 'images/peek_bin.svg';
-
-
-  // refactor to add shapes to group
-
   // add the shape to the layer
-  layer.add(rect);
+  bucketLayer.add(peekBucket);
 
-  // add the shape to the layer
-  layer.add(staticRect);
-
-  // add the shape to the layer
-  layer.add(staticRect2);
-
-  // add the shape to the layer
-  layer.add(bucket1);
-
-  // add the shape to the layer
-  // layer.add(bucket2);
-
-  // add the layer to the stage
-  stage.add(layer);
+  stage.add(bucketLayer);
 
 
   var selectRect = new Kinetic.Tween({
-    node: rect,
-    duration: 3,
+    node: movingRect,
+    duration: 4,
     x: 250,
     y: 100
   })
 
-  var selectRectDrop = new Kinetic.Tween({
-    node: rect,
+  var rectDrop = new Kinetic.Tween({
+    node: movingRect,
     duration: .2,
     y: 300,
     easing: Kinetic.Easings.Linear
   })
 
-  var otherRect = new Kinetic.Tween({
-    node: staticRect,
-    duration: 1,
+  var staticShapes = new Kinetic.Tween({
+    node: staticRectGroup,
+    duration: 3,
     x: -300,
     easing: Kinetic.Easings.Linear
   })
 
-  var otherRect2 = new Kinetic.Tween({
-    node: staticRect2,
+  var bucketSlide = new Kinetic.Tween({
+    node: peekBucket,
     duration: 1,
-    x: -300,
+    x: -200,
     easing: Kinetic.Easings.Linear
   })
 
   var bucketJiggle = new Kinetic.Tween({
-    node: bucket1,
-    duration: 1,
-    x: 250,
+    node: peekBucket,
+    duration: 3.5,
+    x: 150,
     scaleX: 1.5,
     scaleY: 1.5
   })
@@ -124,19 +116,19 @@ $(document).ready(function(){
   }, 1000);
 
   setTimeout(function() {
-    selectRectDrop.play();
-  }, 4000);
+    rectDrop.play();
+  }, 5500);
 
   setTimeout(function() {
-    otherRect.play();
-  }, 1000);
+    bucketSlide.play();
+  }, 600);
 
   setTimeout(function() {
-    otherRect2.play();
+    staticShapes.play();
   }, 1000);
 
   setTimeout(function() {
     bucketJiggle.play();
-  }, 5000);
+  }, 2000);
 
 });
