@@ -14,3 +14,7 @@ body {
   display: block;
   margin-top: 5px;
 }
+
+#bin {
+  z-index: 999;
+}

@@ -77,7 +77,7 @@ $(document).ready(function(){
 
   var selectRect = new Kinetic.Tween({
     node: movingRect,
-    duration: 4,
+    duration: 4.4,
     x: 250,
     y: 100
   })
@@ -98,7 +98,7 @@ $(document).ready(function(){
 
   var bucketSlide = new Kinetic.Tween({
     node: peekBucket,
-    duration: 1,
+    duration: 1.5,
     x: -200,
     easing: Kinetic.Easings.Linear
   })
@@ -130,5 +130,11 @@ $(document).ready(function(){
   setTimeout(function() {
     bucketJiggle.play();
   }, 2000);
+
+
+
+  // GSAP
+  var photo = document.getElementById("bin");
+  TweenLite.from(photo, 1.5, {width:100});
 
 });
