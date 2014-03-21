@@ -5,6 +5,7 @@ $(document).ready(function(){
     height: 500
   });
 
+  var bugFile = new Image();
   // Static Rectangles
   var shapesLayer = new Kinetic.Layer();
 
@@ -111,6 +112,30 @@ $(document).ready(function(){
     scaleY: 1.5
   })
 
+  bugFile.src = "images/peek_bin.svg";
+
+
+  function getAnimation() {
+    var creature = new Kinetic.Image({
+      image: bugFile,
+      width: 100,
+      height: 80
+    });
+
+    var bezTween = new TweenMax(creature, 6, {
+      bezier:{
+        type:"soft",
+        values:[{setX:150, setY:300}, {setX:300, setY:-10}, {setX:500 + Math.random() *100, setY:320*Math.random() + 50}, {setX:650, setY:320*Math.random() + 50}, {setX:900, setY:100}, {setX:1100, setY:500}], 
+        autoRotate:["setX", "setY", "setRotationDeg"]
+      },
+      ease:Linear.easeNone, autoCSS:false
+    });
+
+    bucketLayer.add(creature);
+
+    return bezTween;
+  }
+
   setTimeout(function() {
     selectRect.play();
   }, 1000);
@@ -134,7 +159,22 @@ $(document).ready(function(){
 
 
   // GSAP
+  // var photo = document.getElementById("bin");
+  // TweenLite.from(photo, 1.5, {width:100, delay: 5});
+
   var photo = document.getElementById("bin");
-  TweenLite.from(photo, 1.5, {width:100});
+  TweenLite.from(photo, 1.5, {width:100, delay: 5});
+
+  // GSAP static rec 1
+  var nullRectang = document.getElementById("staticArticle");
+  TweenLite.to(nullRectang,4, {right:"600px", ease:Circ.easeIn, delay: .5});
+
+    // GSAP static rec 1
+  var nullRectang2 = document.getElementById("staticArticle2");
+  TweenLite.to(nullRectang2,4, {right:"600px", ease:Circ.easeIn, delay: .5});
+
+   // GSAP moving rec
+  var selectedRectang = document.getElementById("movingRecty");
+  TweenLite.to(selectedRectang,4, {left:"40px", ease:Circ.easeOut});
 
 });

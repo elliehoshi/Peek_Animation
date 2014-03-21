@@ -12,9 +12,48 @@ body {
 #buttons > input {
   padding: 10px;
   display: block;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 #bin {
   z-index: 999;
+  margin-top: 100px; 
+}
+
+#staticArticle {
+  height: 100px;
+  width: 300px;
+  border-radius: 3px;
+  background-color: pink;
+  margin: 0 auto; 
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#staticArticle2 {
+  height: 100px;
+  width: 300px;
+  border-radius: 3px;
+  background-color: pink;
+  margin: 0 auto; 
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#movingRecty {
+  height: 100px;
+  width: 300px;
+  border-radius: 3px;
+  background-color: cyan;
+  margin: 0 auto;
+  margin-bottom: 10px; 
+  position: relative;
+}
+
+.sockStage {
+  overflow: hidden;
+  height: 2000px;
+  width: 600px;
+  margin: 0 auto;
+  border: 1px solid black;
 }
